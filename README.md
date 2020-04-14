@@ -36,8 +36,7 @@ Remove the app from the device:
 make delete
 ```
 
-
-## Example of Ledger wallet functionality
+## Example usage
 
 Test functionality:
 ```bash
