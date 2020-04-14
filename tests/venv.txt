@@ -1,0 +1,15 @@
+
+#virtualenv venv
+#source venv/bin/activate
+#cd /home/erik/projects/ledger/authorization/repos/blue-loader-python
+#pip install .
+
+export PYTHONPATH=/home/erik/projects/ledger/authorization/repos/blue-loader-python
+
+./test_example.py
+./test_ecdsasig_offline.py
+./test_ecdsasig.py
+
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./test_example.py 
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./test_ecdsasig.py
+

@@ -21,7 +21,8 @@ account = '{:08x}'.format(int(args.account_number))
 # Ask for confirmation
 # txt = "E0020100" + '{:02x}'.format(len(donglePath) + 1) + '{:02x}'.format( int(len(donglePath) / 4 / 2)) + donglePath
 # No confirmation
-apduMessage = "E0020100" + '{:02x}'.format(len(account) + 1) + account
+#apduMessage = "E0020100" + '{:02x}'.format(len(account) + 1) + account
+apduMessage = "E0020000" + '{:02x}'.format(len(account) + 1) + account
 apdu = bytearray.fromhex(apduMessage)
 
 print("~~ Ledger Boilerplate ~~")

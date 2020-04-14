@@ -20,7 +20,7 @@ $(error Environment variable BOLOS_SDK is not set)
 endif
 include $(BOLOS_SDK)/Makefile.defines
 
-APP_LOAD_PARAMS= --curve ed25519 --path "44'/1234'" --appFlags 0x240 $(COMMON_LOAD_PARAMS)
+APP_LOAD_PARAMS= --curve secp256k1 --path "" --appFlags 0x250 $(COMMON_LOAD_PARAMS)
 
 APPVERSION_M=1
 APPVERSION_N=0
@@ -84,7 +84,7 @@ endif
 DEFINES       += HAVE_UX_FLOW
 
 # Enabling debug PRINTF
-DEBUG = 0
+DEBUG = 1
 ifneq ($(DEBUG),0)
 
         ifeq ($(TARGET_NAME),TARGET_NANOX)
