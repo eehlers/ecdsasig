@@ -2,18 +2,18 @@
 export BOLOS_ENV=/home/erik/projects/ledger/bolos-devenv
 export BOLOS_SDK=/home/erik/projects/ledger/boilerplate/nanos-secure-sdk
 
+make
+cp bin/app.elf ~/projects/ledger/speculos/apps/ecdsasig.elf
+
 make load
 
 ===
 
-./speculos.py apps/app.elf
-
-./speculos.py -d apps/app.elf & ./tools/debug.sh apps/app.elf
-
-./speculos.py --sdk 1.5 apps/app.elf
-
-./speculos.py --sdk 1.5 -d apps/app.elf &
-./tools/debug.sh apps/app.elf
+export SEED="barely sun snack this snack relief pipe attack disease boss enlist lawsuit"
+./speculos.py apps/ecdsasig.elf
+./speculos.py -d apps/ecdsasig.elf & ./tools/debug.sh apps/ecdsasig.elf
+./speculos.py --seed "$SEED" apps/ecdsasig.elf
+./speculos.py --seed "$SEED" -d apps/ecdsasig.elf & ./tools/debug.sh apps/ecdsasig.elf
 
 ===
 

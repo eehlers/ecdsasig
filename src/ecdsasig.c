@@ -28,10 +28,8 @@ void ecdsasig(uint8_t *dataBuffer, volatile unsigned int *tx) {
     int ret = cx_ecdsa_verify(&public_key, CX_LAST, CX_SHA256, dataBuffer, 32, sig, siglen);
     PRINTF("ret=%d\n", ret);
 
-    G_io_apdu_buffer[0] = 0x01;
-    G_io_apdu_buffer[1] = 0x02;
-    G_io_apdu_buffer[2] = 0x03;
-    *tx = 3;
+    os_memmove(G_io_apdu_buffer, sig, siglen);
+    *tx = siglen;
     THROW(0x9000);
 }
 
