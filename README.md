@@ -40,7 +40,11 @@ make delete
 
 Test functionality:
 ```bash
-export PYTHONPATH=/path/to/blue-loader-python
+python -m venv venv
+source venv/bin/activate
+cd /home/projects/ledger/blue-loader-python
+pip install .
+cd -
 ./test_ecdsasig.py
 ```
 The app is headless and there is no user interaction.  The app is currently hard coded to sign using the key found at derivation path `m/0`.  The app could easily be enhanced to parameterize this value.
