@@ -3,7 +3,7 @@
 <https://github.com/eehlers/ecsdasig>
 
 ## Overview
-This article presents an app for the Ledger Nano S/X, the app generates an ECDSA signature of a message.
+This is an app for the Ledger Nano S/X, the app generates an ECDSA signature of a message.
 
 Normally you would use the Nano to sign a bitcoin transaction.  But your security model might call for you to generate an ECDSA signature of some other message.  For example, you might sign a hash of an application binary, as a means of authenticating the binary.  It can be convenient to use the Nano to generate such signatures.  Ideally when signing an arbitrary message, you would use Bitcoin Message Signing, which prepends a hard coded value to the signed message, thereby preventing an attacker from tricking you into inadvertently signing a transaction.  But sometimes Bitcoin Message Signing is not an option, for example if that format is not supported by the consumer to whom you are passing the signature.  This `ecsdsasig` app supports that use case by generating an ECDSA signature of an arbitrary message.  It is not advisable to install this app to a device whose secret relates to real funds.
 
