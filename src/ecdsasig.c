@@ -5,9 +5,10 @@
 #include "utils.h"
 
 void ecdsasig(uint8_t *dataBuffer, volatile unsigned int *tx) {
-    unsigned char bip32PathLength = 0x01;
-    unsigned int bip32PathInt[1];
-    bip32PathInt[0] = 0;
+    unsigned char bip32PathLength = 0x02;
+    unsigned int bip32PathInt[2];
+    bip32PathInt[0] = 42 | 0x80000000;
+    bip32PathInt[1] = 0 | 0x80000000;
     unsigned char privateComponent[32];
     os_perso_derive_node_bip32(CX_CURVE_256K1, bip32PathInt, bip32PathLength, privateComponent, NULL);
     cx_ecfp_private_key_t private_key;
