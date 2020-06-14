@@ -1,1 +1,1 @@
-vi README.md Makefile cmd
+vi README.md readme.txt Makefile cmd
