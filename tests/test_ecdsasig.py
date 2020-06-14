@@ -13,7 +13,7 @@ print("message=" + message)
 
 messageBin = binascii.unhexlify(message)
 
-apduMessage = "E003"
+apduMessage = "E003032A00"
 apdu = bytearray.fromhex(apduMessage)
 apdu.extend(messageBin)
 
