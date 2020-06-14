@@ -1,0 +1,1 @@
+vi -c "source /home/erik/.vimrc.02.c" $(find . -name "*.c" -o -name "*.h" | sort)
