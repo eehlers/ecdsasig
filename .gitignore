@@ -1,11 +1,12 @@
 bin
 debug
 dep
-obj
 dev-env
+gitignore
+.idea
+obj
 src/glyphs.c
 src/glyphs.h
-.idea
-.vscode
-gitignore
 .tags
+venv
+.vscode

@@ -1,0 +1,1 @@
+vi -c "source /home/erik/.vimrc.02.py" venv.txt cmd *py

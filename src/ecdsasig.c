@@ -4,11 +4,41 @@
 #include "ux.h"
 #include "utils.h"
 
+#define MAX_BIP32_PATH 10
+
+unsigned long int btchip_read_u32(unsigned char *buffer, unsigned char be,
+                                  unsigned char skipSign) {
+    unsigned char i;
+    unsigned long int result = 0;
+    unsigned char shiftValue = (be ? 24 : 0);
+    for (i = 0; i < 4; i++) {
+        unsigned char x = (unsigned char)buffer[i];
+        if ((i == 0) && skipSign) {
+            x &= 0x7f;
+        }
+        result += ((unsigned long int)x) << shiftValue;
+        if (be) {
+            shiftValue -= 8;
+        } else {
+            shiftValue += 8;
+        }
+    }
+    return result;
+}
+
 void ecdsasig(uint8_t *dataBuffer, volatile unsigned int *tx) {
-    unsigned char bip32PathLength = 0x02;
-    unsigned int bip32PathInt[2];
-    bip32PathInt[0] = 42 | 0x80000000;
-    bip32PathInt[1] = 0 | 0x80000000;
+
+    unsigned char bip32PathLength = dataBuffer[0];
+    unsigned int bip32PathInt[MAX_BIP32_PATH];
+    dataBuffer++;
+    if (bip32PathLength > MAX_BIP32_PATH) {
+        THROW(INVALID_PARAMETER);
+    }
+    for (unsigned char i=0; i<bip32PathLength; i++) {
+        bip32PathInt[i] = btchip_read_u32(dataBuffer, 1, 0);
+        dataBuffer += 4;
+    }
+
     unsigned char privateComponent[32];
     os_perso_derive_node_bip32(CX_CURVE_256K1, bip32PathInt, bip32PathLength, privateComponent, NULL);
     cx_ecfp_private_key_t private_key;
