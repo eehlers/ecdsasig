@@ -47,9 +47,7 @@ pip install .
 cd -
 ./test_ecdsasig.py
 ```
-The app is headless and there is no user interaction.  The app is currently hard coded to sign using the key found at derivation path `m/42h/0h`.  The app could easily be enhanced to parameterize this value.
-
-Here is a screenshot of an example test run against the emulator:
+The app is headless and there is no user interaction.  Here is a screenshot of an example test run against the emulator:
 ![screenshot](img/screenshot.png)
 
 The script `test_ecdsasig_offline.py` generates a signature in software, without calling the ledger, this can be useful for purposes of troubleshooting.
