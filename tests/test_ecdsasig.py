@@ -25,7 +25,7 @@ messageBin = bytes.fromhex(MESSAGE)
 
 apduMessage = "E003"
 apdu = bytearray.fromhex(apduMessage)
-apdu.extend(parse_bip32_path("42'/0'", 10))
+apdu.extend(parse_bip32_path(TEST_PATH, 10))
 apdu.extend(messageBin)
 
 dongle = getDongle(True)
