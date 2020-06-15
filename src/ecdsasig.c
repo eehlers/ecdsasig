@@ -12,6 +12,7 @@ unsigned long int btchip_read_u32(unsigned char *buffer, unsigned char be,
     unsigned long int result = 0;
     unsigned char shiftValue = (be ? 24 : 0);
     for (i = 0; i < 4; i++) {
+        PRINTF("buffer[%u]=%u\n", i, buffer[i]);
         unsigned char x = (unsigned char)buffer[i];
         if ((i == 0) && skipSign) {
             x &= 0x7f;
@@ -28,8 +29,24 @@ unsigned long int btchip_read_u32(unsigned char *buffer, unsigned char be,
 
 void ecdsasig(uint8_t *dataBuffer, volatile unsigned int *tx) {
 
-    unsigned int bip32PathInt[MAX_BIP32_PATH];
+    PRINTF("dataBuffer=\n%.*H\n", 37, dataBuffer);
+
+//    unsigned char bip32PathLength = 0x02;
+//    unsigned int bip32PathInt[2];
+//    bip32PathInt[0] = 42 | 0x80000000;
+//    bip32PathInt[1] = 0 | 0x80000000;
+
+    unsigned char bip32PathLength_foo = 0x02;
+    unsigned int bip32PathInt_foo[2];
+    bip32PathInt_foo[0] = 42 | 0x80000000;
+    bip32PathInt_foo[1] = 0 | 0x80000000;
+    PRINTF("bip32PathLength_foo=%u\n", bip32PathLength_foo);
+    PRINTF("bip32PathInt_foo[0]=%u\n", bip32PathInt_foo[0]);
+    PRINTF("bip32PathInt_foo[1]=%u\n", bip32PathInt_foo[1]);
+
     unsigned char bip32PathLength = dataBuffer[0];
+    unsigned int bip32PathInt[MAX_BIP32_PATH];
+    PRINTF("bip32PathLength=%u\n", bip32PathLength);
     dataBuffer++;
     if (bip32PathLength > MAX_BIP32_PATH) {
         THROW(INVALID_PARAMETER);
@@ -37,12 +54,10 @@ void ecdsasig(uint8_t *dataBuffer, volatile unsigned int *tx) {
     for (unsigned char i=0; i<bip32PathLength; i++) {
         bip32PathInt[i] = btchip_read_u32(dataBuffer, 1, 0);
         dataBuffer += 4;
+        PRINTF("bip32PathInt[%u]=%u\n", i, bip32PathInt[i]);
     }
+    PRINTF("dataBuffer=\n%.*H\n", 37, dataBuffer);
 
-//    unsigned char bip32PathLength = 0x02;
-//    unsigned int bip32PathInt[2];
-//    bip32PathInt[0] = 42 | 0x80000000;
-//    bip32PathInt[1] = 0 | 0x80000000;
     unsigned char privateComponent[32];
     os_perso_derive_node_bip32(CX_CURVE_256K1, bip32PathInt, bip32PathLength, privateComponent, NULL);
     cx_ecfp_private_key_t private_key;

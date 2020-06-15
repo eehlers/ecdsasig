@@ -8,6 +8,7 @@ cp bin/app.elf ~/projects/ledger/speculos/apps/ecdsasig.elf
 ./speculos.py -d apps/ecdsasig.elf & ./tools/debug.sh apps/ecdsasig.elf
 
 LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 python ./test_example.py
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 python ./test_ecdsasig.py
 
 ===
 
@@ -23,5 +24,5 @@ ledgerblue.commException.CommException: Exception : Invalid status 6d00 (Unexpec
 
 ledgerblue.commException.CommException: Exception : Invalid status 6804 (Unknown reason)
 
--> ?  I get this error with the device connected and the ecdsasig app open.  FOr some reason the command works against the emulator but not against a physical device.
+-> ?  I get this error with the device connected and the ecdsasig app open.  For some reason the command works against the emulator but not against a physical device.
 
