@@ -51,3 +51,4 @@ The app is headless and there is no user interaction.  Here is a screenshot of a
 ![screenshot](img/screenshot.png)
 
 The script `test_ecdsasig_offline.py` generates a signature in software, without calling the ledger, this can be useful for purposes of troubleshooting.
+
